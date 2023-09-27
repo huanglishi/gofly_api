@@ -1,0 +1,12 @@
+tmp
+.history
+.github
+tmp
+gofly
+runtime/app
+runtime/logs
+
+.local
+# local env files
+*.exe
+*.exe~

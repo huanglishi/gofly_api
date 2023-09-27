@@ -1,0 +1,55 @@
+dbconf:
+     # 数据库类型 mysql, sqlite3, postgres, sqlserver
+     driver: mysql
+     #服务器地址 本地建议 127.0.0.1
+     hostname: 127.0.0.1
+     #端口 默认3306
+     hostport: 3306
+     #用户名
+     username: root
+     #密码
+     password: root
+     #数据库名
+     database: gofly_api
+     #数据表前缀
+     prefix: 
+jwt:
+     secret: 3Bde3BGEbYqtqyEUzW3ry8jKFcaPH17fRmTmqE7MDr05Lwj95uruRKrrkb44TJ4s
+     jwt_ttl: 43200
+app:
+     #版本号
+     version: 1.2.1
+     #环境状态：dev=开发，pro=生产
+     env: dev
+     #运行服务端口（根据您的实际情况修改）
+     port: 8088
+     #接口合法性验证
+     apisecret: gofly@888
+     #接口JWT验证、跨域域名-不添加请求时报403 (开发、部署必改),部署域名时：“allowurl”中添加您的域名
+     allowurl: http://localhost:9101,http://localhost:9102
+     #token超时时间单位分钟 
+     tokenouttime: 10 
+     #调用cpu个数
+     cpunum: 3
+     # Gin 框架在运行的时候默认是debug模式 有： 开发：debug，生产：release，测试模式：test
+     runlogtype: debug
+     # 配置根域名访问重定向路径,默认是业务端后台
+     rootview: webbusiness
+     #不需要token-根模块(多个,分隔)
+     noVerifyTokenRoot: resource
+     #不需要api接口合法性验证-根模块md5加密(多个,分隔)
+     noVerifyAPIRoot: resource,common
+     #不需要验证token-具体请求路径
+     noVerifyToken: /common/uploadfile/get_image,/common/install/index,/common/install/save
+     #不需要接口合法性-具体请求路径
+     noVerifyAPI: /common/install/index,/common/install/save
+log:
+     level: info  # 日志等级debug
+     root_dir: ./runtime/logs # 日志根目录
+     filename: app.log # 日志文件名称
+     format: json # 写入格式 可选json
+     show_line: true # 是否显示调用行
+     max_backups: 3 # 旧文件的最大个数
+     max_size: 500 # 日志文件最大大小（MB）
+     max_age: 28 # 旧文件的最大保留天数
+     compress: true # 是否压缩
