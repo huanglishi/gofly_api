@@ -22,10 +22,9 @@ GoFly API开发框架来自我们的医疗项目，从2019年开始用于医疗�
 │   ├── home                # 可以编写平台对应网站
 │   └── controller.go       # 应用控制器
 ├── bootstrap               # 工具方法
-├── config                  # 配置文件
 ├── global                  # 全局变量
 ├── model                   # 数据模型
-├── resource                # 静态资源
+├── resource                # 静态资源和配置文件config.yml
 ├── route                   # 路由
 ├── runtime                 # 运行日志文件
 ├── tmp                     # 开发是使用fresh热编译 产生临时文件

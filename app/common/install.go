@@ -8,7 +8,6 @@ import (
 	"gofly/utils"
 	"gofly/utils/results"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"reflect"
@@ -50,7 +49,7 @@ func (api *Install) Index(context *gin.Context) {
 
 // 安装
 func (api *Install) Save(c *gin.Context) {
-	body, _ := ioutil.ReadAll(c.Request.Body)
+	body, _ := io.ReadAll(c.Request.Body)
 	var parameter map[string]interface{}
 	_ = json.Unmarshal(body, &parameter)
 	path, err := os.Getwd()
@@ -70,7 +69,7 @@ func (api *Install) Save(c *gin.Context) {
 
 	//导入书库配置
 	SqlPath := fmt.Sprintf("%v\\resource\\staticfile\\template\\gofly_api.sql", path)
-	sqls, sqlerr := ioutil.ReadFile(SqlPath)
+	sqls, sqlerr := os.ReadFile(SqlPath)
 	if sqlerr != nil {
 		results.Failed(c, "数据库文件不存在："+SqlPath, nil)
 		return

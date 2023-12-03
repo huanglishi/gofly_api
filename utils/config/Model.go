@@ -21,6 +21,7 @@ type App struct {
 	TokenOutTime      string `yaml:"tokenouttime"`
 	CPUnum            string `yaml:"cpunum"`
 	Domain            string `yaml:"domain"`
+	Vueobjroot        string `yaml:"vueobjroot"`
 	Rootview          string `yaml:"rootview"`
 	RunlogType        string `yaml:"runlogtype"`
 	NoVerifyTokenRoot string `yaml:"noVerifyTokenRoot"`

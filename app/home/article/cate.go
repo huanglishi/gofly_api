@@ -5,7 +5,7 @@ import (
 	"gofly/model"
 	"gofly/utils"
 	"gofly/utils/results"
-	"io/ioutil"
+	"io"
 	"reflect"
 	"time"
 
@@ -34,7 +34,7 @@ func (api *Cate) GetList(c *gin.Context) {
 // 新增、编辑
 func (api *Cate) Save(c *gin.Context) {
 	//获取post传过来的data
-	body, _ := ioutil.ReadAll(c.Request.Body)
+	body, _ := io.ReadAll(c.Request.Body)
 	var parameter map[string]interface{}
 	_ = json.Unmarshal(body, &parameter)
 	//当前用户如果登录token，用这个方法获取uid
@@ -76,7 +76,7 @@ func (api *Cate) Save(c *gin.Context) {
 // 更新状态
 func (api *Cate) UpStatus(c *gin.Context) {
 	//获取post传过来的data
-	body, _ := ioutil.ReadAll(c.Request.Body)
+	body, _ := io.ReadAll(c.Request.Body)
 	var parameter map[string]interface{}
 	_ = json.Unmarshal(body, &parameter)
 	res2, err := model.DB().Table("business_article_cate").Where("id", parameter["id"]).Data(map[string]interface{}{"status": parameter["status"]}).Update()
@@ -94,7 +94,7 @@ func (api *Cate) UpStatus(c *gin.Context) {
 // 删除
 func (api *Cate) Del(c *gin.Context) {
 	//获取post传过来的data
-	body, _ := ioutil.ReadAll(c.Request.Body)
+	body, _ := io.ReadAll(c.Request.Body)
 	var parameter map[string]interface{}
 	_ = json.Unmarshal(body, &parameter)
 	ids := parameter["ids"]

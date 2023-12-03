@@ -23,7 +23,6 @@ var Routes = []Route{}
 
 // 注册控制器
 func Register(controller interface{}, PkgPathstr string) bool {
-	// fmt.Printf("日志：%v\n", PkgPathstr)
 	vbf := reflect.ValueOf(controller)
 	//非控制器或无方法则直接返回
 	if vbf.NumMethod() == 0 {
@@ -35,20 +34,16 @@ func Register(controller interface{}, PkgPathstr string) bool {
 		rootPkg = PkgPath_arr[len(PkgPath_arr)-1]
 	}
 	ctrlName := reflect.TypeOf(controller).String()
-	// fmt.Println("ctrlName=", ctrlName)
 	module := ctrlName
 	if strings.Contains(ctrlName, ".") {
 		module = ctrlName[strings.Index(ctrlName, ".")+1:]
 	}
-	// fmt.Println("module=", module)
 	if module == "Index" { //去index
 		module = "/"
 	} else {
 		module = "/" + strings.ToLower(module) + "/"
 	}
 	v := reflect.ValueOf(controller)
-	// fmt.Println("遍历方法:")
-	// fmt.Println(ctrlName)
 	//遍历方法
 	for i := 0; i < v.NumMethod(); i++ {
 		method := v.Method(i)
@@ -68,8 +63,6 @@ func Register(controller interface{}, PkgPathstr string) bool {
 		for j := 0; j < method.Type().NumIn(); j++ {
 			params = append(params, method.Type().In(j))
 		}
-		// fmt.Println("params=", params)
-		// fmt.Println("action=", action)
 		route := Route{path: path, Method: method, Args: params, httpMethod: httpMethod}
 		Routes = append(Routes, route)
 		if strings.HasPrefix(action, "GetPost") { //再增加一个get请求
@@ -77,7 +70,6 @@ func Register(controller interface{}, PkgPathstr string) bool {
 			Routes = append(Routes, route)
 		}
 	}
-	// fmt.Println("Routes=", Routes)
 	return true
 }
 
@@ -104,7 +96,6 @@ func Bind(e *gin.Engine) {
 func match(path string, route Route) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		fields := strings.Split(path, "/")
-		// fmt.Println("fields,len(fields)=", fields, len(fields))
 		if len(fields) < 3 {
 			return
 		}

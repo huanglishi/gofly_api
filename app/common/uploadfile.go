@@ -8,7 +8,6 @@ import (
 	"gofly/route/middleware"
 	"gofly/utils"
 	"gofly/utils/results"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -172,6 +171,6 @@ func (api *Uploadfile) Get_image(c *gin.Context) {
 // 4.显示图片base64
 func (api *Uploadfile) Get_imagebase(c *gin.Context) {
 	imageName := c.Query("url")
-	file, _ := ioutil.ReadFile(imageName)
+	file, _ := os.ReadFile(imageName)
 	c.Writer.WriteString(string(file))
 }
